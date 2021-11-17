@@ -8,7 +8,8 @@ const formidable = require('express-formidable');
 const app=express()
 const PORT=5000;
 const aws = require('aws-sdk');
-// const PORT=5500;
+
+// ##############  S3 Bucket Code starts Here ############################
 
 const Access_Key_ID = 'AKIAYMVANH6UD27NRCZN';
 const Secret_Access_Key = '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';
@@ -40,6 +41,8 @@ const uploadFile = (myfileName) =>{
 }
 
 uploadFile('Arvinder.jpg');
+
+// ##############  S3 Bucket Code ends Here ############################
 
 app.use(
     cors({
