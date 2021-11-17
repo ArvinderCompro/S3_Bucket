@@ -11,8 +11,8 @@ const aws = require('aws-sdk');
 
 // ##############  S3 Bucket Code starts Here ############################
 
-const Access_Key_ID = 'AKIAYMVANH6UD27NRCZN';
-const Secret_Access_Key = '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';
+const Access_Key_ID = '';
+const Secret_Access_Key = '';
 const Bucket_Name='myfirsts3bucket8499';
 
 const s3 = new aws.S3({
