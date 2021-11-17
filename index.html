@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="upload.css"/>
+    <script src="upload.js"></script> -->
+    <title>Document</title>
+</head>
+<body>
+  <!-- <button id="download-button">SEND</button>
+  <div id="demo"></div> -->
+  <!-- This will hold the local download file -->
+  <input type="file" id="file-input" />
+<button id="upload-button">Upload File</button>
+</body>
+<!-- <script> 
+// Call an AJAX
+document.querySelector('#download-button').addEventListener('click', function() {
+	var request = new XMLHttpRequest();
+    
+  request.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+    
+  request.open('POST', 'http://localhost:5000/users'); 
+  request.setRequestHeader('Content-Type','application/json')
+  request.send(JSON.stringify({name:"Arvinder", age:22})); 
+  // request.send();
+});
+</script> -->
+<script>
+  document.querySelector('#upload-button').addEventListener('click', function() {
+  let data = new FormData();
+
+// file selected by the user
+// in case of multiple files append each of them
+data.append('file', document.querySelector('#file-input').files[0]);
+
+let request = new XMLHttpRequest();
+request.open('POST', 'http://localhost:5000/users'); 
+
+// upload progress event
+request.upload.addEventListener('progress', function(e) {
+	let percent_complete = Math.round(100 * e.loaded / e.total)
+	
+	// percentage of upload completed
+	console.log("Percent " + percent_complete + "%");
+});
+
+// AJAX request finished event
+request.addEventListener('load', function(e) {
+	// HTTP status message
+	console.log("status" + request.status);
+
+	// request.response will hold the response from the server
+	console.log("response " + request.responseText);
+});
+
+// send POST request to server side script
+// request.setRequestHeader('Content-Type','multipart/form-data')
+request.send(data);
+})
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!-- <body> -->
+    <!-- <div id="progress">
+        <div id="bar"></div>
+    </div>
+    <form id="upform" onsubmit="return save()">
+        <input type="file" id="upfile" required/>
+        <input type="submit" value="START!" id="upstart"/>
+      </form> -->
+      <!-- <input type="file" onchange="upload(this.files[0])"> -->
+<!-- </body> -->
+<!-- <script>
+function upload(file) {
+  let xhr = new XMLHttpRequest();
+
+  // listen for upload progress
+  xhr.upload.onprogress = function(event) {
+    let percent = Math.round(100 * event.loaded / event.total);
+    console.log(`File is ${percent} uploaded.`);
+  };
+
+  // handle error
+  xhr.upload.onerror = function() {
+    console.log(`Error during the upload: ${xhr.status}.`);
+  };
+
+  // upload completed successfully
+  xhr.onload = function() {
+    console.log('Upload completed successfully.');
+  };
+
+  xhr.open('POST', 'http://localhost:5500/Simple_Json');
+  xhr.send(file);
+}
+</script> -->
